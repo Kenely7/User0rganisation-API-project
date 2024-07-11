@@ -177,24 +177,7 @@ class OrganisationListCreateView(APIView):
                 }
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
-    
 
-    # def post(self, request):
-    #     serializer = OrganisationCreateSerializer(data=request.data, context={'request': request})
-    #     if serializer.is_valid():
-    #         organisation = serializer.save()
-    #         return Response({
-    #             "status": "success",
-    #             "message": "Organisation created successfully",
-    #             "data": {
-    #                 "orgId": organisation.org_id,
-    #                 "name": organisation.name,
-    #                 "description": organisation.description
-    #             }
-    #         }, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
 
 
 class OrganisationDetailView(APIView):
