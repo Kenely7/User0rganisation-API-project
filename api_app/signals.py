@@ -7,7 +7,7 @@ from .models import User, Organisation
 def create_user_organization(sender, instance, created, **kwargs):
 
     if created:
-        org_name = f"{instance.first_name}'s Organization"
+        org_name = f"{instance.first_name}'s Organisation"
         organisation = Organisation.objects.create(name=org_name)
         organisation.users.add(instance)
         instance.default_organisation = organisation

@@ -19,29 +19,31 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         try:
-            serializer.is_valid(raise_exception=True)
-            user = serializer.save()
-            
-            # Generate JWT token
-            refresh = RefreshToken.for_user(user)
-            access_token = str(refresh.access_token)
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.save()
+                
+                # Generate JWT token
+                refresh = RefreshToken.for_user(user)
+                access_token = str(refresh.access_token)
 
-            response_data = {
-                "status": "success",
-                "message": "Registration successful",
-                "data": {
-                    "accessToken": access_token,
-                    "user": {
-                        "userId": user.id,
-                        "firstName": user.first_name,
-                        "lastName": user.last_name,
-                        "email": user.email,
-                        "phone": user.phone,
+                response_data = {
+                    "status": "success",
+                    "message": "Registration successful",
+                    "data": {
+                        "accessToken": access_token,
+                        "user": {
+                            "userId": user.id,
+                            "firstName": user.first_name,
+                            "lastName": user.last_name,
+                            "email": user.email,
+                            "phone": user.phone,
+                        }
                     }
                 }
-            }
 
-            return Response(response_data,status=status.HTTP_201_CREATED)
+                return Response(response_data,status=status.HTTP_201_CREATED)
+            else:
+                return Response(response_data.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except ValidationError as e:
             response_data = {
                 "status": "Bad request",
@@ -161,7 +163,7 @@ class OrganisationListCreateView(APIView):
             return Response({
     "status": "Bad Request",
     "message": "Client error",
-    "statusCode": 400
+    "statusCode": 401
 }, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = OrganisationSerializer(data=data)

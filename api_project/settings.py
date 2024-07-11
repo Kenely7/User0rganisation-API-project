@@ -78,11 +78,25 @@ WSGI_APPLICATION = 'api_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # Replace with your Supabase database name
+#         'USER': 'postgres.tlzloukgkatcjltuyivb',  # Replace with your Supabase database user
+#         'PASSWORD': 'Pk35p8JY@Gyzecn',  # Replace with your Supabase database password
+#         'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Replace with your Supabase database host
+#         'PORT': '6543',  # Supabase PostgreSQL port is typically 5432
+#     }
+# }
+
+
 
 from datetime import timedelta
 from django.conf import settings

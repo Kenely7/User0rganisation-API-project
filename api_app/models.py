@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = None
     first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, )
     phone = models.CharField(max_length=20)
     organisations = models.ForeignKey('Organisation', related_name='default_users', null=True, blank=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField(default=True)
